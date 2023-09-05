@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.springframework:spring-jdbc'
     implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'com.maxmind.geoip2:geoip2:2.15.0'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'org.postgresql:r2dbc-postgresql'
