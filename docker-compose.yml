@@ -1,0 +1,15 @@
+services:
+  db:
+    container_name: payment-service-db
+    image: postgres:15-alpine
+    ports:
+      - 2222:5432
+    volumes:
+      - pay_db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: payment-service-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+volumes:
+  pay_db_volume:
