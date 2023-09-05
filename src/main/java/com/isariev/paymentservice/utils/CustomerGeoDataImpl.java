@@ -22,7 +22,7 @@ public class CustomerGeoDataImpl implements CustomerGeoData {
     @Override
     public CityResponse getCityResponse() {
         CityResponse cityResponse;
-        try (DatabaseReader reader = new DatabaseReader.Builder(database).build();) {
+        try (DatabaseReader reader = new DatabaseReader.Builder(database).build()) {
             InetAddress ipAddress = InetAddress.getByName(getIp());
             cityResponse = reader.city(ipAddress);
         } catch (Exception e) {
