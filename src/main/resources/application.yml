@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:2222/payment-service-db
+    username: postgres
+    password: postgres
+  flyway:
+    url: jdbc:postgresql://localhost:2222/payment-service-db
+    user: postgres
+    password: postgres
