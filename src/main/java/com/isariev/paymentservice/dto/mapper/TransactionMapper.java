@@ -21,7 +21,6 @@ public class TransactionMapper {
 
     public Transaction toEntity(TransactionRequestDto requestDto) {
         return Transaction.builder()
-                .type("payment")
                 .status("PENDING")
                 .message("Transaction in processing")
                 .amount(requestDto.amount())
@@ -31,24 +30,6 @@ public class TransactionMapper {
                 .yodaWalletTransactionId(UUID.randomUUID())
                 .testMode(requestDto.test_mode())
                 .build();
-    }
-
-    public TransactionResponseDto toResponseDto(Transaction transaction) {
-        return new TransactionResponseDto(
-                transaction.getUid().toString(),
-                transaction.getType(),
-                transaction.getStatus(),
-                transaction.getMessage(),
-                transaction.getAmount(),
-                transaction.getCurrency(),
-                transaction.getCreatedAt() == null ? null : transaction.getCreatedAt().toString(),
-                transaction.getUpdatedAt() == null ? null : transaction.getUpdatedAt().toString(),
-                transaction.getYodaWalletTransactionId().toString(),
-                customerMapper.mapToResponseDto(transaction.getCustomer()),
-                null,
-                new BillingResponseDto(transaction.getAmount(), transaction.getCurrency()),
-                true
-        );
     }
 
     public TransactionResponseDto toResponseDto(Transaction transaction, FormResponseDto formResponseDto) {
