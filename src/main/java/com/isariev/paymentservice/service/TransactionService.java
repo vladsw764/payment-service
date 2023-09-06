@@ -6,16 +6,16 @@ import com.isariev.paymentservice.model.Transaction;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
 public interface TransactionService {
-    Mono<TransactionResponseDto> createTransaction(TransactionRequestDto transactionRequest);
-
-    Mono<String> getTransactionStatus(UUID uid);
-
-    Mono<TransactionResponseDto> getById(UUID id, String requestURI, String method);
+    Mono<TransactionResponseDto> createTransaction(TransactionRequestDto transactionRequest, String requestURI, String method);
 
     Flux<TransactionResponseDto> getAllTransactions(String requestURI, String method);
+
+    Mono<TransactionResponseDto> getById(String id, String requestURI, String method);
+
+    Mono<TransactionResponseDto> createPayout(TransactionRequestDto transactionRequest, String requestURI, String method);
+
+    Mono<String> getTransactionStatus(String uid);
 
     Mono<Void> receiveTransactionStatus(Transaction transaction);
 }
