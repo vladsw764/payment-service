@@ -8,10 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
 import java.util.Enumeration;
 
 @Component
@@ -50,8 +47,8 @@ public class CustomerGeoDataImpl implements CustomerGeoData {
                     }
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SocketException e) {
+            throw new RuntimeException("Error! Can't take a mac address", e);
         }
         return null;
     }
@@ -74,6 +71,5 @@ public class CustomerGeoDataImpl implements CustomerGeoData {
             }
         }
     }
-
 
 }
