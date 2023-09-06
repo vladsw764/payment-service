@@ -26,9 +26,9 @@ public class TransactionController {
         return new ResponseEntity<>(transactionService.createTransaction(transactionRequest, request.getRequestURI(), request.getMethod()), HttpStatus.CREATED);
     }
 
-    @PostMapping
+    @PostMapping("/payout")
     public ResponseEntity<Mono<TransactionResponseDto>> createPayout(@RequestBody TransactionRequestDto transactionRequest,
-                                                                                HttpServletRequest request) {
+                                                                     HttpServletRequest request) {
         return new ResponseEntity<>(transactionService.createPayout(transactionRequest, request.getRequestURI(), request.getMethod()), HttpStatus.CREATED);
     }
 
