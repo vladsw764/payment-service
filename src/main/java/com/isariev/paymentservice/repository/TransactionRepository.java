@@ -16,6 +16,8 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 
     Flux<Transaction> findByStatus(String status);
 
+    Flux<Transaction> findAllByType(String type);
+
     @Query("UPDATE transactions SET status = :status WHERE uid = :uid")
     Mono<Void> updateTransactionStatus(String status, UUID uid);
 }
