@@ -1,5 +1,9 @@
 package com.isariev.paymentservice;
 
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.HostConfig;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -13,7 +17,14 @@ public class TestPaymentServiceApplication {
     @Bean
     @ServiceConnection
     PostgreSQLContainer<?> postgresContainer() {
-        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:15-alpine"));
+        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:15-alpine"))
+                .withDatabaseName("integration-tests-db")
+                .withUsername("postgres")
+                .withPassword("postgres")
+                .withExposedPorts(5432)
+                .withCreateContainerCmdModifier(cmd -> cmd.withHostConfig(
+                        new HostConfig().withPortBindings(new PortBinding(Ports.Binding.bindPort(777), new ExposedPort(5432)))
+                ));
     }
 
     public static void main(String[] args) {
