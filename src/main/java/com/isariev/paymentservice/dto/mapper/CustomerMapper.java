@@ -1,5 +1,6 @@
 package com.isariev.paymentservice.dto.mapper;
 
+import com.isariev.paymentservice.dto.payoutResponse.PayoutCustomerResponseDto;
 import com.isariev.paymentservice.dto.request.CustomerRequestDto;
 import com.isariev.paymentservice.dto.response.CustomerResponseDto;
 import com.isariev.paymentservice.model.Customer;
@@ -37,6 +38,23 @@ public class CustomerMapper {
 
     public CustomerResponseDto mapToResponseDto(Customer customer) {
         return new CustomerResponseDto(
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getCountry(),
+                customer.getCity(),
+                customer.getZip(),
+                customer.getAddress(),
+                customer.getPhoneNumber(),
+                customer.getDeviceId(),
+                customer.getUid().toString(),
+                customer.getAccountCreationDate() == null ? null : customer.getAccountCreationDate().toString(),
+                customer.getAccountCreationCountry(),
+                customer.getEmail()
+        );
+    }
+
+    public PayoutCustomerResponseDto mapToPayoutResponseDto(Customer customer) {
+        return new PayoutCustomerResponseDto(
                 customer.getFirstName(),
                 customer.getLastName(),
                 customer.getCountry(),
