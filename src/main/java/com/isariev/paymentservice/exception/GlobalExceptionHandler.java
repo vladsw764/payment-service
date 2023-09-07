@@ -20,6 +20,16 @@ public class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(404), ex.getMessage());
     }
 
+    @ExceptionHandler(GeoDataRetrievalException.class)
+    public ProblemDetail handleGeoDataRetrievalException(GeoDataRetrievalException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), ex.getMessage());
+    }
+
+    @ExceptionHandler(MacAddressRetrievalException.class)
+    public ProblemDetail handleMacAddressRetrievalException(MacAddressRetrievalException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), ex.getMessage());
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ProblemDetail handleRuntimeException(RuntimeException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(404), String.valueOf(ex.getCause().getMessage()));
