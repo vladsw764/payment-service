@@ -13,6 +13,9 @@ spring:
 logging:
   pattern:
     console: "%highlight{[%-5level]} %cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %yellow([%t]) %magenta(%logger{36}) - %msg%n"
-  level:
-    io.r2dbc.postgresql.QUERY: DEBUG # for queries
-    io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+#  level:
+#    io.r2dbc.postgresql.QUERY: DEBUG # for queries
+#    io.r2dbc.postgresql.PARAM: DEBUG # for parameters
+
+server:
+  port: 8081
