@@ -1,5 +1,8 @@
 package com.isariev.paymentservice.dto.mapper;
 
+import com.isariev.paymentservice.dto.payoutResponse.PayoutBillingResponseDto;
+import com.isariev.paymentservice.dto.payoutResponse.PayoutFormResponseDto;
+import com.isariev.paymentservice.dto.payoutResponse.PayoutResponseDto;
 import com.isariev.paymentservice.dto.request.TransactionRequestDto;
 import com.isariev.paymentservice.dto.response.BillingResponseDto;
 import com.isariev.paymentservice.dto.response.FormResponseDto;
@@ -47,6 +50,25 @@ public class TransactionMapper {
                 formResponseDto,
                 new BillingResponseDto(transaction.getAmount(), transaction.getCurrency()),
                 true
+        );
+    }
+
+    public PayoutResponseDto toResponseDto(Transaction transaction, PayoutFormResponseDto formResponseDto) {
+        return new PayoutResponseDto(
+                transaction.getUid().toString(),
+                transaction.getType(),
+                transaction.getStatus(),
+                transaction.getMessage(),
+                transaction.getAmount(),
+                transaction.getCurrency(),
+                transaction.getCreatedAt() == null ? null : transaction.getCreatedAt().toString(),
+                transaction.getUpdatedAt() == null ? null : transaction.getUpdatedAt().toString(),
+                transaction.getYodaWalletTransactionId().toString(),
+                customerMapper.mapToPayoutResponseDto(transaction.getCustomer()),
+                formResponseDto,
+                new PayoutBillingResponseDto(transaction.getCurrency(), transaction.getAmount()),
+                transaction.getNotificationUrl(),
+                transaction.getReturnUrl()
         );
     }
 }
