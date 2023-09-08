@@ -16,7 +16,7 @@ import java.util.Enumeration;
 @Component
 public class CustomerGeoDataImpl implements CustomerGeoData {
 
-    private final File database = new File("src/main/resources/GeoLite2-City.mmdb");
+    private final File database = new File("GeoLite2-City.mmdb");
 
     /**
      * Retrieves the city-level geographical data for the customer's IP address.
