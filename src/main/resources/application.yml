@@ -2,13 +2,13 @@ spring:
   application:
     name: payment-service
   r2dbc:
-    url: r2dbc:postgresql://localhost:2222/payment-service-db
+    url: r2dbc:postgresql://containers-us-west-48.railway.app:5953/railway
     username: postgres
-    password: postgres
+    password: CHANGE_ME
   flyway:
-    url: jdbc:postgresql://localhost:2222/payment-service-db
+    url: jdbc:postgresql://containers-us-west-48.railway.app:5953/railway
     user: postgres
-    password: postgres
+    password: CHANGE_ME
 
 logging:
   pattern:

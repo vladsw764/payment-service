@@ -16,14 +16,14 @@ public class TestPaymentServiceApplication {
 
     @Bean
     @ServiceConnection
-    PostgreSQLContainer<?> postgresContainer() {
+    public static PostgreSQLContainer<?> postgresContainer() {
         return new PostgreSQLContainer<>(DockerImageName.parse("postgres:15-alpine"))
                 .withDatabaseName("integration-tests-db")
                 .withUsername("postgres")
                 .withPassword("postgres")
                 .withExposedPorts(5432)
                 .withCreateContainerCmdModifier(cmd -> cmd.withHostConfig(
-                        new HostConfig().withPortBindings(new PortBinding(Ports.Binding.bindPort(777), new ExposedPort(5432)))
+                        new HostConfig().withPortBindings(new PortBinding(Ports.Binding.bindPort(7777), new ExposedPort(5432)))
                 ));
     }
 
