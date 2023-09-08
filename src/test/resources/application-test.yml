@@ -1,9 +1,0 @@
-spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:777/integration-tests-db
-    username: postgres
-    password: postgres
-  flyway:
-    url: jdbc:postgresql://localhost:777/integration-tests-db
-    user: postgres
-    password: postgres
