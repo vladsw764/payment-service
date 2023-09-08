@@ -1,15 +1,44 @@
 services:
-  db:
-    container_name: payment-service-db
-    image: postgres:15-alpine
+  # Payment Service
+  payment-service:
+    image: payment-service:0.1
     ports:
-      - 2222:5432
-    volumes:
-      - pay_db_volume:/var/lib/postgresql/data
+      - "8081:8081"
+    networks:
+      - mynetwork
+    depends_on:
+      - gateway-service
+
+  # Gateway Service
+  gateway-service:
+    image: gateway-service:0.1
+    ports:
+      - "8082:9090"
+    depends_on:
+      - redis
     environment:
-      POSTGRES_DB: payment-service-db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - redis_data:/data
+    networks:
+      - mynetwork
+
+  # Redis
+  redis:
+    container_name: redis-container
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
 
 volumes:
-  pay_db_volume:
+  redis_data:
+
+
