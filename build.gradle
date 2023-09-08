@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.isariev'
-version = '0.0.1-SNAPSHOT'
+version = '0.1'
 
 java {
     sourceCompatibility = '17'
@@ -23,8 +23,6 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.flywaydb:flyway-core'
@@ -46,4 +44,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.register('docker', Exec) {
+    dependsOn 'build'
+    description = 'Builds the Docker image for payment-service'
+    group = 'Docker'
+
+    commandLine 'sh', '-c', './gradlew clean build && docker build -t payment-service:0.1 .'
 }
